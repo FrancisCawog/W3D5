@@ -18,4 +18,22 @@ class PolyTreeNode
   end
 
 
+  def add_child(child_node)
+    child_node.parent = self
+  end 
+
+  def remove_child(child_node)
+    if child_node.parent == nil 
+      raise "error" 
+    end
+    child_node.parent = nil
+  end 
+
+  
+
+
+
+
+
+
 end
