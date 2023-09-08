@@ -7,9 +7,9 @@ class PolyTreeNode
     @children = []
   end
 
-  def parent=(parent)
-    self.parent = @parent
-  end
+  # def parent=(node)
+  #   self.parent = node
+  # end
 
 
 end
