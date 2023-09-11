@@ -48,6 +48,29 @@ class KnightPathFinder
         row, col = pos
         self[row][col] = val
     end 
+
+    def find_path(end_pos)
+        @root_node.bfs(end_pos)
+    end 
+
+    def trace_path_back
+        new_array = []
+
+        until @root_node.find_path(end_pos).parent == nil
+
+
+        new_array
+    end 
+
+
+
+
+
+
+
+
+
+
 end 
 
 
@@ -55,3 +78,5 @@ a = KnightPathFinder.new([0,0])
 a.build_move_tree
 puts a.considered_positions.length
 print a.considered_positions
+
+p a.find_path([3,3])
