@@ -50,22 +50,20 @@ class KnightPathFinder
     end 
 
     def find_path(end_pos)
-        @root_node.bfs(end_pos)
+      @end_node = @root_node.bfs(end_pos)
     end 
 
     def trace_path_back
-        new_array = []
-
-        until @root_node.find_path(end_pos).parent == nil
+        new_array = [@end_node.value]
 
 
-        new_array
+        until @end_node.parent == nil
+        new_array << @end_node.parent.value
+        @end_node = @end_node.parent
+        end
+        
+        new_array.reverse 
     end 
-
-
-
-
-
 
 
 
@@ -76,7 +74,9 @@ end
 
 a = KnightPathFinder.new([0,0])
 a.build_move_tree
-puts a.considered_positions.length
-print a.considered_positions
+# puts a.considered_positions.length
+# print a.considered_positions
 
-p a.find_path([3,3])
+a.find_path([7,6])
+
+p a.trace_path_back
