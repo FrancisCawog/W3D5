@@ -22,7 +22,7 @@ class KnightPathFinder
     def new_move_positions(pos)
         array = KnightPathFinder.valid_moves?(pos)
         selected_pos = array.select{|pos| !@considered_positions.include?(pos)}
-        @considered_positions << selected_pos
+        @considered_positions += selected_pos
         selected_pos
     end
 
@@ -30,10 +30,10 @@ class KnightPathFinder
         queue = [@root_node]
         until queue.empty?
             ele = queue.shift
-            new_move_positions(ele).each do |position_pair|
+            new_move_positions(ele.value).each do |position_pair|
                 child_node = PolyTreeNode.new(position_pair)
                 child_node.parent = ele
-                queue += child_node
+                queue += [child_node]
             end 
         end
         return nil 
@@ -54,3 +54,4 @@ end
 a = KnightPathFinder.new([0,0])
 a.build_move_tree
 puts a.considered_positions.length
+print a.considered_positions
