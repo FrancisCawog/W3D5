@@ -3,6 +3,8 @@ require "byebug"
 
 class KnightPathFinder
 
+    attr_reader :considered_positions
+
     def initialize(start_position)
         @root_node = PolyTreeNode.new(start_position) 
         @considered_positions = [start_position]
@@ -28,7 +30,11 @@ class KnightPathFinder
         queue = [@root_node]
         until queue.empty?
             ele = queue.shift
-            queue += PolyTreeNode.new(new_move_positions(ele))
+            new_move_positions(ele).each do |position_pair|
+                child_node = PolyTreeNode.new(position_pair)
+                child_node.parent = ele
+                queue += child_node
+            end 
         end
         return nil 
     end 
@@ -45,5 +51,6 @@ class KnightPathFinder
 end 
 
 
-puts a = KnightPathFinder.new([0,0])
-puts a.build_move_tree([3, 3])
+a = KnightPathFinder.new([0,0])
+a.build_move_tree
+puts a.considered_positions.length
